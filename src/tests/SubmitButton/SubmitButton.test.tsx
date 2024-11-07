@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { SubmitButton } from '../../../components/SubmitButton';
+import { SubmitButton } from '@/components/SubmitButton';
 
 describe('SubmitButton', () => {
   it('renders button with correct text', () => {
