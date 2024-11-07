@@ -8,31 +8,48 @@ if (!secretKey) {
 }
 const encodedKey = new TextEncoder().encode(secretKey);
 
-export async function createSession(userId: string) {
-  const expiresAt = Math.floor(Date.now() / 1000) + 7 * 24 * 60 * 60; // 7 days expiration
-
-  const session = await encrypt({ userId, expiresAt });
-
-  // Await cookies to get ReadonlyRequestCookies
-  const cookieStore = await cookies();
-  cookieStore.set("session", session, {
-    httpOnly: true,
-    secure: true,
-    expires: new Date(expiresAt * 1000), // UNIX timestamp to Date object
-  });
-}
-
-export async function deleteSession() {
-  const cookieStore = await cookies(); // Await to get cookies
-  cookieStore.delete("session");
-}
-
 type SessionPayload = {
   userId: string;
   expiresAt: number;
 };
 
-export async function encrypt(payload: SessionPayload) {
+export async function getSession(): Promise<SessionPayload | null> {
+  const cookieStore = await cookies();
+  const session = cookieStore.get("session");
+  
+  if (!session) {
+    return null;
+  }
+
+  return decrypt(session.value);
+}
+
+export async function createSession(userId: string) {
+  const expiresAt = Math.floor(Date.now() / 1000) + 7 * 24 * 60 * 60; // 7 days expiration
+  const session = await encrypt({ userId, expiresAt });
+
+  const cookieStore = await cookies();
+  cookieStore.set("session", session, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
+    expires: new Date(expiresAt * 1000), // UNIX timestamp to Date object
+  });
+}
+
+export async function deleteSession() {
+  const cookieStore = await cookies();
+  cookieStore.delete({
+    name: "session",
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
+  });
+}
+
+async function encrypt(payload: SessionPayload): Promise<string> {
   return new SignJWT(payload as JWTPayload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
@@ -40,7 +57,8 @@ export async function encrypt(payload: SessionPayload) {
     .sign(encodedKey);
 }
 
-export async function decrypt(session: string | undefined = "") {
+// Re-export decrypt for middleware
+export async function decrypt(session: string): Promise<SessionPayload | null> {
   if (!session) return null;
 
   try {
