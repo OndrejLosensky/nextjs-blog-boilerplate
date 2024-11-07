@@ -25,25 +25,25 @@ export async function login(prevState: LoginState | undefined, formData: FormDat
   const result = loginSchema.safeParse(Object.fromEntries(formData));
 
   if (!result.success) {
-    console.log("Validation failed:", result.error.flatten().fieldErrors);
+    // console.log("Validation failed:", result.error.flatten().fieldErrors);
     return {
       errors: result.error.flatten().fieldErrors,
     };
   }
 
   const { email, password } = result.data;
-  console.log("Attempting login for email:", email);
+  // console.log("Attempting login for email:", email);
 
   // Find user in database
   const user = await prisma.user.findUnique({
     where: { email },
   });
 
-  console.log("Found user:", user ? "yes" : "no");
+  // console.log("Found user:", user ? "yes" : "no");
 
   // Check if user exists and password matches
   const passwordMatch = user ? await bcrypt.compare(password, user.password) : false;
-  console.log("Password matches:", passwordMatch);
+  // console.log("Password matches:", passwordMatch);
 
   if (!user || !passwordMatch) {
     return {
