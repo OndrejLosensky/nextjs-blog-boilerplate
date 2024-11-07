@@ -5,9 +5,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "prod", "test"]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "prod", "test"]
 
 env:
   SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
