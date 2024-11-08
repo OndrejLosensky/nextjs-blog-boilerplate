@@ -4,7 +4,7 @@ import { LogoutButton } from "@/components/LogoutButton"
 import { User } from "@prisma/client"
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { FaHome, FaCog, FaList } from 'react-icons/fa'
+import { FaHome, FaCog } from 'react-icons/fa'
 import { IoMdPin } from "react-icons/io"
 
 interface DashboardSidebarProps {
@@ -16,12 +16,6 @@ const navLinks = [
     href: '/dashboard',
     label: 'Dashboard',
     icon: FaHome,
-    role: 'ALL'
-  },
-  {
-    href: '/dashboard/components',
-    label: 'Components',
-    icon: FaList,
     role: 'ALL'
   },
   {

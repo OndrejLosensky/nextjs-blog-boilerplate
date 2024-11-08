@@ -13,7 +13,7 @@ export function ManageUsersForm({ users }: ManageUsersFormProps) {
   const [editingUser, setEditingUser] = useState<User | null>(null)
 
   return (
-    <div className="mx-auto bg-white p-6 rounded-lg shadow">
+    <div className="mx-auto bg-white p-4 rounded-lg shadow">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">User Management</h1>
         <button 

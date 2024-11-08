@@ -27,9 +27,5 @@ export default async function UserProfilePage() {
     redirect('/login')
   }
 
-  return (
-    <div className="p-4">
-      <EditUserProfileForm user={user}/>
-    </div>
-  )
+  return <EditUserProfileForm user={user}/>
 } 

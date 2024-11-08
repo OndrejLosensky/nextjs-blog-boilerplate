@@ -1,0 +1,12 @@
+# Default robots.txt for Next.js application
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow admin and api routes
+Disallow: /api/*
+Disallow: /admin/*
+
+# Sitemap location (uncomment if you have a sitemap)
+# Sitemap: https://yourdomain.com/sitemap.xml 

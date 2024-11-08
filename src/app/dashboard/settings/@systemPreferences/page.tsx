@@ -1,6 +1,6 @@
 export default function SystemPreferencesPage() {
   return (
-    <div className="mx-auto bg-white p-6 rounded-lg shadow">
+    <div className="mx-auto bg-white p-4 rounded-lg shadow">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">System Preferences</h1>
         <button 

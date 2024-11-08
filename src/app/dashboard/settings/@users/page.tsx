@@ -13,9 +13,5 @@ export default async function UsersPage() {
 
   const users = await getUsers()
 
-  return (
-    <div className="p-4">
-      <ManageUsersForm users={users}/>
-    </div>
-  )
+  return <ManageUsersForm users={users}/>
 } 
