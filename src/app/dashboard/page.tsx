@@ -1,47 +1,19 @@
-import { getSession } from "@/lib/sessions"
-import { prisma } from "@/lib/prisma"
-import { LogoutButton } from "@/components/LogoutButton"
-import { redirect } from 'next/navigation'
-import { DashboardNav } from "@/components/DashboardNav"
+'use client'
 
-export default async function DashboardPage() {
-  const session = await getSession()
+import { useUser } from "@/lib/context/user"
+
+export default function DashboardPage() {
+  const user = useUser()
   
-  if (!session) {
-    redirect('/login')
-  }
-
-  const user = await prisma.user.findUnique({
-    where: { id: session.userId },
-    select: {
-      id: true,
-      email: true,
-      role: true,
-      name: true,
-      password: true,
-      createdAt: true,
-      updatedAt: true,
-    }
-  })
-
-  if (!user) {
-    redirect('/login')
-  }
-
   return (
-    <div className="p-6">
-      <DashboardNav user={user} />
-      
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Dashboard</h1>
-        <LogoutButton />
-      </div>
+    <div className="p-8">
+      <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
       
       {user.role === 'ADMIN' ? (
         <div className="space-y-6">
           <div className="bg-white rounded-lg shadow p-6">
             <h2 className="text-xl font-semibold mb-4">Admin Controls</h2>
-            <div className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
               <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
                 Manage Users
               </button>

@@ -1,11 +1,8 @@
-// Remove any 'use client' directive from this file - it should be a server component
-import { getSession } from "@/lib/sessions"
 import { prisma } from "@/lib/prisma"
-import { redirect } from 'next/navigation'
-import { DashboardNav } from "@/components/DashboardNav"
-import { UsersClient } from "./users-client"
+import { getSession } from "@/lib/sessions"
+import { redirect } from "next/navigation"
 
-export default async function UsersPage() {
+export async function getUsers() {
   const session = await getSession()
   
   if (!session) {
@@ -36,16 +33,12 @@ export default async function UsersPage() {
       name: true,
       role: true,
       createdAt: true,
+      updatedAt: true,
     },
     orderBy: {
       createdAt: 'desc'
     }
   })
 
-  return (
-    <div className="p-6">
-      <DashboardNav user={currentUser} />
-      <UsersClient users={users} />
-    </div>
-  )
-} 
+  return users
+}
