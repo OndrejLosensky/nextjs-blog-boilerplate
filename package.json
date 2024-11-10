@@ -1,6 +1,6 @@
 {
-  "name": "auth-kit",
-  "version": "0.0.1",
+  "name": "devblog",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
