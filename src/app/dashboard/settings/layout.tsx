@@ -17,15 +17,15 @@ export default function SettingsLayout({
     const [activeTab, setActiveTab] = useState(user.role === 'ADMIN' ? 'users' : 'profile');
     
     return (
-      <div className="p-4">
+      <div className="p-4 bg-gray-100 dark:bg-slate-800 h-screen text-gray-900 dark:text-slate-100">
         <div className="flex space-x-4 mb-4">
           {/* Only show Users tab for admin */}         
           <button 
             onClick={() => setActiveTab('profile')}
             className={`px-4 py-2 text-sm font-medium rounded-lg ${
               activeTab === 'profile' 
-                ? 'bg-blue-50 text-blue-700' 
-                : 'text-gray-700 hover:bg-gray-50'
+                ? 'bg-blue-50 text-blue-700 dark:bg-blue-900 dark:text-blue-200' 
+                : 'text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-800'
             }`}
           >
             Profile
@@ -34,8 +34,8 @@ export default function SettingsLayout({
             onClick={() => setActiveTab('system-preferences')}
             className={`px-4 py-2 text-sm font-medium rounded-lg ${
               activeTab === 'system-preferences' 
-                ? 'bg-blue-50 text-blue-700' 
-                : 'text-gray-700 hover:bg-gray-50'
+                ? 'bg-blue-50 text-blue-700 dark:bg-blue-900 dark:text-blue-200' 
+                : 'text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-800'
             }`}
           >
             System Preferences
@@ -45,8 +45,8 @@ export default function SettingsLayout({
               onClick={() => setActiveTab('users')}
               className={`px-4 py-2 text-sm font-medium rounded-lg ${
                 activeTab === 'users' 
-                  ? 'bg-blue-50 text-blue-700' 
-                  : 'text-gray-700 hover:bg-gray-50'
+                  ? 'bg-blue-50 text-blue-700 dark:bg-blue-900 dark:text-blue-200' 
+                  : 'text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-800'
               }`}
             >
               Users

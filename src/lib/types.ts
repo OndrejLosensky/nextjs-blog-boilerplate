@@ -5,6 +5,12 @@ export enum Role {
     ADMIN = 'ADMIN',
   }
 
+  export type Settings = {
+    id: string
+    userId: string
+    preferences: string
+  }
+
   export type User = {
     id: string
     email: string
@@ -13,4 +19,6 @@ export enum Role {
     createdAt: Date
     updatedAt: Date
     password?: string // Optional since we don't always want to expose this
-}
+    settings?: Settings | null
+    theme: string
+  }

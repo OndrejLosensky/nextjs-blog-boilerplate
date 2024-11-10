@@ -1,7 +1,7 @@
 import { getSession } from "@/lib/sessions"
 import { redirect } from 'next/navigation'
 import { EditUserProfileForm } from "@/features/EditUserProfile/client/EditUserProfileForm"
-import { prisma } from "@/lib/prisma"
+import { getUser } from "@/lib/utils/getUser";
 
 export default async function UserProfilePage() {
   const session = await getSession()
@@ -10,18 +10,7 @@ export default async function UserProfilePage() {
     redirect('/login')
   }  
 
-  const user = await prisma.user.findUnique({
-    where: { id: session.userId },
-    select: {
-      id: true,
-      email: true,
-      role: true,
-      name: true,
-      password: true,
-      createdAt: true,
-      updatedAt: true,
-    }
-  })
+  const user = await getUser()
 
   if (!user) {
     redirect('/login')
