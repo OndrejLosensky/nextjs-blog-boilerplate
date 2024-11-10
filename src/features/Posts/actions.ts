@@ -161,6 +161,7 @@ export async function deletePost(postId: string): Promise<ActionResponse> {
 }
 
 export async function getPublishedPosts() {
+  const session = await getSession()
   const posts = await prisma.post.findMany({
     where: {
       published: true,
@@ -172,13 +173,30 @@ export async function getPublishedPosts() {
           email: true,
         },
       },
+      comments: {
+        select: {
+          id: true,
+        },
+      },
+      likes: {
+        select: {
+          userId: true,
+        },
+      },
     },
     orderBy: {
       createdAt: 'desc',
     },
   });
 
-  return posts;
+  return posts.map(post => ({
+    ...post,
+    commentCount: post.comments.length,
+    likeCount: post.likes.length,
+    isLiked: session ? post.likes.some(like => like.userId === session.userId) : false,
+    comments: undefined,
+    likes: undefined,
+  }));
 }
 
 export async function getPost(id: string) {

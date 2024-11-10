@@ -2,9 +2,29 @@ import Image from "next/image";
 import Link from "next/link";
 import { getPublishedPosts } from "@/features/Posts/actions";
 import { formatDistanceToNow } from "date-fns";
+import { HiChat } from "react-icons/hi";
+import { getSession } from "@/lib/sessions";
+import { LikeButton } from "@/features/Likes/LikeButton";
+
+type PublishedPost = {
+  id: string;
+  title: string;
+  content: string;
+  slug: string;
+  imagePath: string | null;
+  createdAt: Date;
+  author: {
+    name: string | null;
+    email: string;
+  };
+  commentCount: number;
+  likeCount: number;
+  isLiked: boolean;
+};
 
 export default async function Home() {
   const posts = await getPublishedPosts();
+  const session = await getSession();
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900">
@@ -12,7 +32,7 @@ export default async function Home() {
         <h1 className="text-3xl font-bold mb-8 text-gray-900 dark:text-white">Latest Posts</h1>
         
         <div className="grid md:grid-cols-3 gap-8">
-          {posts.map((post) => (
+          {posts.map((post: PublishedPost) => (
             <article 
               key={post.id} 
               className="border border-gray-200 dark:border-slate-700 rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
@@ -30,9 +50,21 @@ export default async function Home() {
                     <span className="text-sm text-indigo-600 dark:text-indigo-400 font-semibold">
                       {post.author.name || 'ANONYMOUS'}
                     </span>
-                    <span className="text-sm text-gray-500 dark:text-slate-400">
-                      {formatDistanceToNow(new Date(post.createdAt))} ago
-                    </span>
+                    <div className="flex items-center gap-4">
+                      <div className="flex items-center text-gray-500 dark:text-slate-400">
+                        <HiChat className="w-4 h-4 mr-1" />
+                        <span className="text-sm">{post.commentCount}</span>
+                      </div>
+                      <LikeButton 
+                        postId={post.id}
+                        initialLikeCount={post.likeCount}
+                        initialIsLiked={post.isLiked}
+                        isLoggedIn={!!session}
+                      />
+                      <span className="text-sm text-gray-500 dark:text-slate-400">
+                        {formatDistanceToNow(new Date(post.createdAt))} ago
+                      </span>
+                    </div>
                   </div>
                   <h2 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
                     {post.title}

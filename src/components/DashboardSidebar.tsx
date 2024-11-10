@@ -7,7 +7,6 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { FaHome, FaCog } from 'react-icons/fa'
 import { IoMdPin } from "react-icons/io"
-import { MdOutlinePermMedia } from "react-icons/md"
 
 interface DashboardSidebarProps {
   user: User
@@ -24,12 +23,6 @@ const navLinks = [
     href: '/dashboard/posts',
     label: 'Posts',
     icon: IoMdPin,
-    role: 'ALL'
-  }, 
-  {
-    href: '/dashboard/media',
-    label: 'Media',
-    icon: MdOutlinePermMedia,
     role: 'ALL'
   }, 
   {

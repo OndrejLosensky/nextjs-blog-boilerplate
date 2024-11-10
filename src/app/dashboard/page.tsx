@@ -1,6 +1,7 @@
 import { getPosts } from "@/features/Posts/actions";
 import { Metadata } from "next";
 import { HiDocumentText, HiChat, HiHeart } from "react-icons/hi";
+import { prisma } from "@/lib/prisma";
 
 // Add formatter function
 function formatNumber(num: number): string {
@@ -19,6 +20,8 @@ export const metadata: Metadata = {
 
 export default async function Dashboard() {
   const posts = await getPosts();
+  const commentCount = await prisma.comment.count();
+  const likeCount = await prisma.like.count();
   
   return (
     <div className="p-6">
@@ -38,7 +41,7 @@ export default async function Dashboard() {
             <h2 className="text-sm font-medium text-gray-500 dark:text-slate-400">Total Comments</h2>
             <HiChat className="w-5 h-5 text-gray-400 dark:text-slate-500" />
           </div>
-          <p className="text-3xl font-bold mt-2 text-gray-900 dark:text-white">{formatNumber(20)}</p>
+          <p className="text-3xl font-bold mt-2 text-gray-900 dark:text-white">{formatNumber(commentCount)}</p>
         </div>
 
         <div className="bg-white dark:bg-slate-950 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-slate-800">
@@ -46,7 +49,7 @@ export default async function Dashboard() {
             <h2 className="text-sm font-medium text-gray-500 dark:text-slate-400">Total Likes</h2>
             <HiHeart className="w-5 h-5 text-gray-400 dark:text-slate-500" />
           </div>
-          <p className="text-3xl font-bold mt-2 text-gray-900 dark:text-white">{formatNumber(1280)}</p>
+          <p className="text-3xl font-bold mt-2 text-gray-900 dark:text-white">{formatNumber(likeCount)}</p>
         </div>
       </div>
     </div>
