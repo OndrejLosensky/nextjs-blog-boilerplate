@@ -18,7 +18,7 @@ export enum Role {
     role: string
     createdAt: Date
     updatedAt: Date
-    password?: string // Optional since we don't always want to expose this
+    password?: string
     settings?: Settings | null
     theme: string
   }

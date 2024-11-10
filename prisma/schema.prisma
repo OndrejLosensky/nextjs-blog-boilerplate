@@ -16,5 +16,17 @@ model User {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   theme     String    @default("light")
+  posts     Post[]
 }
 
+model Post {
+  id        String   @id @default(cuid())
+  title     String
+  slug      String   @unique 
+  content   String
+  published Boolean  @default(false)
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
