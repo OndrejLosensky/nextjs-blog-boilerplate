@@ -17,6 +17,7 @@ model User {
   updatedAt DateTime  @updatedAt
   theme     String    @default("light")
   posts     Post[]
+  media     Media[]
 }
 
 model Post {
@@ -24,9 +25,32 @@ model Post {
   title     String
   slug      String   @unique 
   content   String
+  imagePath String?
   published Boolean  @default(false)
   authorId  String
   author    User     @relation(fields: [authorId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Media {
+  id        String   @id @default(cuid())
+  filename  String
+  path      String
+  mimeType  String
+  size      Int
+  uploadedBy String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [uploadedBy], references: [id])
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  action    String
+  userId    String   // who performed the action, but no relation
+  details   String   // JSON string containing relevant details
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
 }

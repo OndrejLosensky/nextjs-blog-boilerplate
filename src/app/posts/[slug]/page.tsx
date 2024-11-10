@@ -4,11 +4,13 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
+type PageProps = {
+  params: { slug: string }
+}
+
 export default async function PostPage({
   params,
-}: {
-  params: { slug: string };
-}) {
+}: PageProps) {
   const post = await getPostBySlug(params.slug);
 
   if (!post) {
@@ -22,7 +24,7 @@ export default async function PostPage({
           href="/"
           className="inline-flex items-center text-sm text-gray-500 dark:text-slate-400 hover:text-gray-700 dark:hover:text-slate-300 mb-8"
         >
-          ← Back to posts
+          ← Back to all posts
         </Link>
 
         <article className="prose dark:prose-invert lg:prose-lg max-w-none">
@@ -36,14 +38,13 @@ export default async function PostPage({
           </div>
 
           <div className="mt-8">
-            <Image
-              src="/placeholder.webp"
-              alt={post.title}
-              width={1200}
-              height={600}
-              className="rounded-lg object-cover w-full aspect-video"
-              priority
-            />
+          <Image
+                  src={post.imagePath || "/placeholder.webp"}
+                  alt={`${post.title} thumbnail`}
+                  width={400}
+                  height={250}
+                  className="w-full h-48 object-cover"
+                />
           </div>
 
           <div className="mt-8 text-gray-700 dark:text-slate-300 leading-relaxed">

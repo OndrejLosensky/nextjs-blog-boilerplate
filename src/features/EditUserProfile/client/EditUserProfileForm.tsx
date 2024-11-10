@@ -45,7 +45,7 @@
                 name="email"
                 defaultValue={user.email}
                 required
-                className="mt-1 block w-full rounded-md border-gray-300 dark:border-slate-700 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:text-slate-100"
+                className="mt-1 block py-2 px-4 w-full rounded-md bg-neutral-100 border dark:border-slate-700 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:text-slate-100"
               />
             </div>
             
@@ -57,7 +57,7 @@
                 type="text"
                 name="name"
                 defaultValue={user.name || ''}
-                className="mt-1 block w-full rounded-md border-gray-300 dark:border-slate-700 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:text-slate-100"
+                className="mt-1 block py-2 px-4 w-full rounded-md bg-neutral-100 border dark:border-slate-700 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:text-slate-100"
               />
             </div>
             
@@ -69,7 +69,7 @@
                 type="password"
                 name="currentPassword"
                 required
-                className="mt-1 block w-full rounded-md border-gray-300 dark:border-slate-700 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:text-slate-100"
+                className="mt-1 block py-2 px-4 w-full rounded-md bg-neutral-100 border dark:border-slate-700 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:text-slate-100"
               />
             </div>
             
@@ -80,7 +80,7 @@
               <input
                 type="password"
                 name="newPassword"
-                className="mt-1 block w-full rounded-md border-gray-300 dark:border-slate-700 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:text-slate-100"
+                className="mt-1 block py-2 px-4 w-full rounded-md bg-neutral-100 border dark:border-slate-700 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:text-slate-100"
               />
             </div>
 

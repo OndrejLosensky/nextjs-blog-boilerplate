@@ -19,7 +19,7 @@ export default async function Home() {
             >
               <Link href={`/posts/${post.slug}`}>
                 <Image
-                  src="/placeholder.webp"
+                  src={post.imagePath || "/placeholder.webp"}
                   alt={`${post.title} thumbnail`}
                   width={400}
                   height={250}

@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { FaHome, FaCog } from 'react-icons/fa'
 import { IoMdPin } from "react-icons/io"
+import { MdOutlinePermMedia } from "react-icons/md"
 
 interface DashboardSidebarProps {
   user: User
@@ -26,6 +27,12 @@ const navLinks = [
     role: 'ALL'
   }, 
   {
+    href: '/dashboard/media',
+    label: 'Media',
+    icon: MdOutlinePermMedia,
+    role: 'ALL'
+  }, 
+  {
     href: '/dashboard/settings',
     label: 'Settings',
     icon: FaCog,
@@ -39,7 +46,14 @@ export function DashboardSidebar({ user }: DashboardSidebarProps) {
   return (
     <div className="flex flex-col h-full w-64 bg-white dark:bg-slate-950 border-r border-gray-200 dark:border-slate-800">
       <div className="p-6 border-b border-gray-200 dark:border-slate-800">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-slate-100">DevBlog</h1>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-slate-100 mb-4">DevBlog</h1>
+        <Link
+          href="/"
+          className="flex items-center text-sm text-gray-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-150"
+        >
+          <FaHome className="w-4 h-4 mr-2" />
+          Back to Site
+        </Link>
       </div>
       
       <nav className="flex-1 p-4 space-y-1">
