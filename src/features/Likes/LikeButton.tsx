@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { HiHeart } from 'react-icons/hi'
 import { toggleLike } from './actions'
+import { useRouter } from 'next/navigation'
 
 interface LikeButtonProps {
   postId: string
@@ -15,10 +16,13 @@ export function LikeButton({ postId, initialLikeCount, initialIsLiked, isLoggedI
   const [likeCount, setLikeCount] = useState(initialLikeCount)
   const [isLiked, setIsLiked] = useState(initialIsLiked)
   const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
 
-  async function handleLikeClick() {
+  async function handleLikeClick(e: React.MouseEvent) {
+    e.preventDefault() // Prevent the click from bubbling up to the parent link
+    
     if (!isLoggedIn) {
-      window.location.href = '/login'
+      router.push('/login')
       return
     }
 
@@ -42,7 +46,13 @@ export function LikeButton({ postId, initialLikeCount, initialIsLiked, isLoggedI
           : 'text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400'
         }`}
     >
-      <HiHeart className={`w-5 h-5 ${isLiked ? 'fill-current' : 'stroke-current fill-none'}`} />
+      <HiHeart 
+        className={`w-5 h-5 ${
+          isLiked 
+            ? 'fill-current' 
+            : 'fill-none stroke-current'
+        }`} 
+      />
       <span>{likeCount}</span>
     </button>
   )

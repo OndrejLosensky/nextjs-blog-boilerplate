@@ -1,4 +1,4 @@
-import { AddPostForm } from "@/features/Posts/AddPostForm"
+import { PostForm } from "@/features/Posts/PostForm"
 import Link from "next/link"
 export default function AddNewPostPage() {
   return (
@@ -12,7 +12,7 @@ export default function AddNewPostPage() {
         </Link>
 
         <h1 className="text-2xl font-bold mb-8 text-gray-900 dark:text-slate-100">Create New Post</h1>
-        <AddPostForm />
+        <PostForm />
       </div>
     </div>
   )

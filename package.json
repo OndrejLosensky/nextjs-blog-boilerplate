@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
+    "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "date-fns": "^4.1.0",
     "jose": "^5.9.6",
@@ -25,6 +26,7 @@
     "@babel/preset-react": "^7.25.9",
     "@babel/preset-typescript": "^7.26.0",
     "@tailwindcss/typography": "^0.5.15",
+    "@types/bcrypt": "^5.0.2",
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20.17.6",
     "@types/react": "^18",
