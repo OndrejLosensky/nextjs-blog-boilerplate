@@ -1,55 +1,47 @@
-# DevBlog - Next.js Blog Platform Boilerplate
+# DevBlog - Next.js Blog Platform
 
-A modern, full-featured blog platform built with Next.js 15, Prisma, and TypeScript. Perfect for personal blogs, content management, and multi-user publishing platforms.
+A modern, full-featured blog platform built with Next.js 15, Prisma, TypeScript, and Tailwind CSS. Perfect for personal blogs, content management, and multi-user publishing platforms.
 
-## Features
+## Core Features
 
 ### Authentication & User Management
-- 🔐 Secure authentication system with session-based auth
-- 👥 Role-based access control (Admin, User)
-- 👤 User profile management
+- 🔐 Session-based authentication
+- 👥 Role-based access control (Admin/User roles)
+- 👤 User profile management with password updates
 - 🎨 Personalized theme preferences (Light/Dark mode)
+- 👨‍💼 Admin user management interface
 
-### Blog Management
+### Blog Features
 - ✍️ Rich post creation and editing
 - 📸 Image upload support for posts
 - 📑 Draft/Publish workflow
-- 🔗 SEO-friendly URLs with slug generation
-- 📱 Responsive layout for all devices
+- 🔗 SEO-friendly URLs with automatic slug generation
+- 📱 Responsive design for all devices
+- 🖼️ Featured image support for posts
 
 ### Engagement Features
-- 💬 Comment system
-- ❤️ Like/Unlike posts
-- 📊 Post statistics (views, likes, comments)
+- 💬 Comment system on posts
+- ❤️ Like/Unlike functionality
+- 📊 Post engagement metrics (comments, likes)
 - 🏷️ Post status management (Published/Draft)
 
-### Dashboard & Administration
+### Dashboard
 - 📊 Analytics dashboard with post metrics
-- 👥 User management interface
 - 📝 Post management with CRUD operations
-- 🔍 Post filtering and search capabilities
-
-### Technical Features
-- ⚡ Server-side rendering with Next.js 14
-- 🛡️ Protected routes with middleware
-- 🔒 Secure file uploads
-- 📱 Mobile-responsive design
-- 🌓 Dark mode support
-- 🔍 SEO optimization
-- 🚀 API route protection
+- 👥 User profile customization
+- 🎨 Theme preference settings
 
 ## Tech Stack
 
 ### Frontend
-- Next.js 14
+- Next.js 15 with App Router
 - TypeScript
 - Tailwind CSS
 - React Icons
 - date-fns for date formatting
 
 ### Backend
-- Prisma ORM
-- SQLite database
-- bcrypt for password hashing
-- JOSE for JWT handling
-- Zod for validation
+- Prisma ORM with SQLite
+- bcryptjs for password hashing
+- Zod for form validation
+- Server Actions for API handling
