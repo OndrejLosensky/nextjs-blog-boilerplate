@@ -82,7 +82,15 @@ export async function createPost(formData: FormData): Promise<ActionResponse> {
 }
 
 export async function getPosts() {
+  const session = await getSession();
+  if (!session) {
+    return [];
+  }
+
   const posts = await prisma.post.findMany({
+    where: {
+      authorId: session.userId,
+    },
     include: {
       author: {
         select: {
@@ -90,13 +98,30 @@ export async function getPosts() {
           email: true,
         },
       },
+      comments: {
+        select: {
+          id: true,
+        },
+      },
+      likes: {
+        select: {
+          id: true,
+        },
+      },
     },
-  })
+    orderBy: {
+      createdAt: 'desc',
+    },
+  });
   
   return posts.map(post => ({
     ...post,
     slug: post.title.toLowerCase().replace(/\s+/g, '-'),
-  }))
+    commentCount: post.comments.length,
+    likeCount: post.likes.length,
+    comments: undefined,
+    likes: undefined,
+  }));
 }
 
 export async function updatePostStatus(postId: string, published: boolean): Promise<ActionResponse> {

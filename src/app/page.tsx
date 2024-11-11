@@ -5,6 +5,7 @@ import { formatDistanceToNow } from "date-fns";
 import { HiChat } from "react-icons/hi";
 import { getSession } from "@/lib/sessions";
 import { LikeButton } from "@/features/Likes/LikeButton";
+import { Header } from "@/components/Header";
 
 type PublishedPost = {
   id: string;
@@ -28,6 +29,7 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900">
+      <Header />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <h1 className="text-3xl font-bold mb-8 text-gray-900 dark:text-white">Latest Posts</h1>
         

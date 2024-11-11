@@ -8,7 +8,7 @@ export default async function PostsPage() {
 
   return (
     <div className="p-8 dark:bg-slate-800 min-h-screen">
-      <div className="max-w-6xl mx-auto space-y-8">
+      <div className="mx-auto space-y-8">
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-bold text-gray-900 dark:text-slate-100">Posts</h1>
           <Link
@@ -19,7 +19,6 @@ export default async function PostsPage() {
           </Link>
         </div>
 
-        {/* Posts List */}
         <Suspense fallback={<div>Loading posts...</div>}>
           <PostsList initialPosts={posts} />
         </Suspense>

@@ -5,6 +5,7 @@ import { formatDistanceToNow } from 'date-fns'
 import { updatePostStatus, deletePost } from './actions'
 import Image from 'next/image'
 import Link from 'next/link'
+import { HiChat, HiHeart } from 'react-icons/hi'
 
 type PostWithAuthor = {
   id: string
@@ -16,6 +17,8 @@ type PostWithAuthor = {
   authorId: string
   createdAt: Date
   updatedAt: Date
+  commentCount: number
+  likeCount: number
   author: {
     name: string | null
     email: string
@@ -87,7 +90,7 @@ export function PostsList({ initialPosts }: PostsListProps) {
                           {post.author.name && ` • by ${post.author.name}`}
                         </p>
                       </div>
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-4">
                         <button
                           onClick={() => handleStatusToggle(post.id, !post.published)}
                           className={`px-3 py-1 rounded-full text-sm font-medium ${
@@ -98,6 +101,18 @@ export function PostsList({ initialPosts }: PostsListProps) {
                         >
                           {post.published ? 'Published' : 'Draft'}
                         </button>
+                        
+                        <div className="flex items-center space-x-3 text-sm text-gray-500 dark:text-slate-400">
+                          <div className="flex items-center">
+                            <HiChat className="w-4 h-4 mr-1" />
+                            <span>{post.commentCount}</span>
+                          </div>
+                          <div className="flex items-center">
+                            <HiHeart className="w-4 h-4 mr-1" />
+                            <span>{post.likeCount}</span>
+                          </div>
+                        </div>
+
                         <Link
                           href={`/dashboard/posts/edit/${post.id}`}
                           className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
